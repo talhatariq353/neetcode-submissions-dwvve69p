@@ -1,0 +1,19 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        count_s1 = [0] * 26
+        count_s2 = [0] * 26
+        
+        for i, ch in enumerate(s1):
+            count_s1[ord(ch) - ord('a')] += 1
+
+        l = 0
+        for r, ch in enumerate(s2):
+            while r - l + 1 > len(s1):
+                count_s2[ord(s2[l]) - ord('a')] -= 1
+                l += 1
+            count_s2[ord(ch) - ord('a')] += 1
+
+            if count_s2 == count_s1:
+                return True
+        
+        return False
